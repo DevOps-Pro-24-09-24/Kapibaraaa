@@ -54,3 +54,23 @@ gunicorn -b 0.0.0.0 app:app
 App will be available via url `http://<instance_dns_or_ip>:8000`
 
 
+### Run app with docker-compose 
+#### [install docker-compose](https://docs.docker.com/compose/install/)
+create .env file from .env.template, example:
+
+```
+MYSQL_ROOT_PASSWORD="Pa55WD"
+MYSQL_USER="admin"
+MYSQL_PASSWORD="Pa55WD"
+MYSQL_DATABASE="flask_db"
+MYSQL_HOST="mariadb-db"
+```
+MYSQL_HOST - name service or container_name in docker-compose.yaml
+
+
+Navigate to the directory: ``hw-10/flask-alb-app`` <br>
+Build the Docker images: ``docker compose build``  <br>
+Run the Docker containers: ``docker compose run`` <br>
+Shut down the Docker containers: ``docker compose down`` <br>
+
+App will be available via url `http://0.0.0.0:5000/`
