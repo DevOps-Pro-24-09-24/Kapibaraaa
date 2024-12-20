@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  db:
+    image: mariadb:10.5
+    container_name: mariadb-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
+  web:
+    build: .
+    container_name: flask-app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    volumes:
+      - .:/alb
+    environment:
+      - PYTHONUNBUFFERED=1
+    env_file:
+      - .env
+    restart: always
+    command: |
+      /usr/bin/env sh -c "/usr/local/bin/wait-for.sh db:3306 --
+       gunicorn -b 0.0.0.0:5000 app:app"
+
+volumes:
+  mariadb-data:
