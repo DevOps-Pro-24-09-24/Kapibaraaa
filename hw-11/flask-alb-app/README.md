@@ -68,9 +68,11 @@ MYSQL_HOST="mariadb-db"
 MYSQL_HOST - name service or container_name in docker-compose.yaml
 
 
-Navigate to the directory: ``hw-10/flask-alb-app`` <br>
+Navigate to the directory: ``hw-11/flask-alb-app`` <br>
 Build the Docker images: ``docker compose build``  <br>
 Run the Docker containers: ``docker compose run`` <br>
 Shut down the Docker containers: ``docker compose down`` <br>
 
-App will be available via url `http://0.0.0.0:5000/`
+App will be available via url `https://localhost/`
+
+
